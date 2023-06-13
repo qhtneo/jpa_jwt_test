@@ -32,4 +32,5 @@ public interface MemberRepository extends JpaRepository<Member, UUID> {
 	MemberEmailNicknameProjection findEmailAndNicknameByEmail(String email); // TODO test
 	
 	Optional<MemberIdProjection> findIdByEmail(String email);
+
 }

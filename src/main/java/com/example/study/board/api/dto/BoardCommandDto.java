@@ -9,11 +9,19 @@ import java.util.UUID;
 
 public record BoardCommandDto() {
     public record BoardAddRequestDto(
-            String boardTitle,
-            String boardContent
+            String title,
+            String content
+    ){}
+    public record BoardUpdateRequestDto(
+            String title,
+            String content
     ){}
     @Builder
     public record BoardAddResponseDto(
+            boolean success
+    ){}
+    @Builder
+    public record BoardUpdateResponseDto(
             boolean success
     ){}
 }
