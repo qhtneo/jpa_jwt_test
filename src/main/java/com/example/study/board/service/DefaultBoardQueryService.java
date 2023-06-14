@@ -1,45 +1,60 @@
 package com.example.study.board.service;
 
-import com.example.study.board.api.dto.BoardQueryDto.BoardFindResponseDto;
+import com.example.study.board.api.dto.BoardQueryDto.FindBoardListResponseDto;
 import com.example.study.board.domain.Board;
+import com.example.study.board.exception.BoardFailureErrorCode;
 import com.example.study.board.repository.BoardRepository;
+import com.example.study.board.type.SearchType;
+import com.example.study.member.repository.MemberRepository;
+import com.example.study.util.jwt.JwtPayloadParserBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 @RequiredArgsConstructor
-public final class DefaultBoardQueryService implements BoardQueryService{
-    private final BoardRepository repository;
-
-
-//    @Override
-//    public List<BoardFindResponseDto> findAll() {
-//        return repository.findAll();
-//    }
-@Override
-public List<BoardFindResponseDto> findAll() {
-    List<Board> boards = repository.findAll();
-    List<BoardFindResponseDto> dtos = new ArrayList<>();
-    for (Board board : boards) {
-
-        BoardFindResponseDto dto = BoardFindResponseDto.builder()
-                .boardNum(board.getBoardNum())
-                .title(board.getTitle())
-                .content(board.getContent())
-                .createdAt(board.getCreatedAt())
-                .build();
-        dtos.add(dto);
-    }
-    return dtos;
-}
+public final class DefaultBoardQueryService implements BoardQueryService {
+    private final BoardRepository boardRepository;
+    private final JwtPayloadParserBuilder jwtPayloadParserBuilder;
+    private final MemberRepository memberRepository;
 
     @Override
-    public Board findByBoardNum(Long boardNum) {
-        return repository.findByBoardNum(boardNum);
+    public FindBoardListResponseDto findBoardList(Pageable pageable, String keyword, SearchType searchType,String page) {
+        Page<Board> boardSearchResult = null;
+        if (page != null && !page.isEmpty()) {
+            pageable = PageRequest.of(Integer.parseInt(page) - 1, pageable.getPageSize(), pageable.getSort());
+        }
+        switch (searchType){
+            case TITLE ->
+                    boardSearchResult = boardRepository.findAllByTitleContainsIgnoreCase(keyword, pageable);
+            case CONTENT ->
+                    boardSearchResult = boardRepository.findAllByContentContainsIgnoreCase(keyword, pageable);
+            case MEMBER_NAME ->
+                    boardSearchResult = boardRepository.findAllByNickNameContainsIgnoreCase(keyword, pageable);
+            case BOARD_NUM ->
+                    boardSearchResult = boardRepository.findAllByBoardNum(Long.parseLong(keyword), pageable);
+            case NONE ->
+                    boardSearchResult = boardRepository.findAll(pageable);
+        }
+
+
+        pageable = pageable.previousOrFirst();
+        List<Board> boards = boardSearchResult.toList();
+        long lastPageNumber = boardSearchResult.getTotalPages();
+        if (pageable.getPageNumber() >= lastPageNumber) {
+            throw BoardFailureErrorCode.PAGE_OUT_OF_RANGE.defaultException();
+        }
+        return FindBoardListResponseDto.builder()
+                .boardList(boards)
+                .lastPage(lastPageNumber)
+                .build();
     }
+
+
 
 }

@@ -1,14 +1,15 @@
 package com.example.study.board.api;
 
-import com.example.study.board.api.dto.BoardQueryDto.BoardFindResponseDto;
-import com.example.study.board.domain.Board;
+
+import com.example.study.board.api.dto.BoardQueryDto.FindBoardListResponseDto;
 import com.example.study.board.service.BoardQueryService;
-import lombok.Getter;
+import com.example.study.board.type.SearchType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.UUID;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,14 +18,13 @@ public final class BoardQueryApi {
     private final BoardQueryService boardQueryService;
 
     @GetMapping("")
-    public List<BoardFindResponseDto> boardFindResponseDto(){
-        return boardQueryService.findAll();
+    public FindBoardListResponseDto findBoardList(
+            @PageableDefault(size=10, sort="boardNum", direction = Sort.Direction.DESC) Pageable pageable,
+            @RequestParam(required = false) String keyword,
+            @RequestParam(required = false, defaultValue = "NONE") SearchType searchType,
+            @RequestParam(required = false) String page
+    ){
+        return boardQueryService.findBoardList(pageable,keyword,searchType,page);
     }
-
-    @GetMapping(path = "/{boardNum}")
-    public Board boardFindByBoardNum(@PathVariable Long boardNum){
-        return boardQueryService.findByBoardNum(boardNum);
-    }
-
 
 }

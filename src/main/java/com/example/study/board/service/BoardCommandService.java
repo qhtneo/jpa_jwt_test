@@ -1,12 +1,12 @@
 package com.example.study.board.service;
 
-import com.example.study.board.api.dto.BoardCommandDto.BoardAddRequestDto;
-import com.example.study.board.api.dto.BoardCommandDto.BoardUpdateRequestDto;
-import com.example.study.board.api.dto.BoardCommandDto.BoardUpdateResponseDto;
+import com.example.study.board.api.dto.BoardCommandDto.*;
 
 import javax.servlet.http.HttpServletRequest;
 
 public interface BoardCommandService {
-    boolean add(BoardAddRequestDto dto, HttpServletRequest request);
+    BoardCreateResponseDto create(BoardCreateRequestDto dto, HttpServletRequest request);
     BoardUpdateResponseDto update(Long boardNum, BoardUpdateRequestDto dto, HttpServletRequest request);
+
+    BoardDeleteResponseDto delete(Long boardNum, HttpServletRequest request);
 }

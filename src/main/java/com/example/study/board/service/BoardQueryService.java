@@ -1,17 +1,9 @@
 package com.example.study.board.service;
 
-import com.example.study.board.api.dto.BoardQueryDto.BoardFindResponseDto;
-import com.example.study.board.domain.Board;
-
-import java.util.List;
-import java.util.UUID;
+import com.example.study.board.api.dto.BoardQueryDto.FindBoardListResponseDto;
+import com.example.study.board.type.SearchType;
+import org.springframework.data.domain.Pageable;
 
 public interface BoardQueryService {
-
-
-    List<BoardFindResponseDto> findAll();
-
-    Board findByBoardNum(Long boardNum);
-
-
+    FindBoardListResponseDto findBoardList(Pageable pageable, String keyword, SearchType searchType,String page);
 }

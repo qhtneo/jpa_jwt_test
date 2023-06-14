@@ -3,25 +3,28 @@ package com.example.study.board.api.dto;
 
 import lombok.Builder;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import java.util.UUID;
-
 public record BoardCommandDto() {
-    public record BoardAddRequestDto(
+    public record BoardCreateRequestDto(
             String title,
             String content
     ){}
+    @Builder
+    public record BoardCreateResponseDto(
+            boolean success
+    ){}
+
     public record BoardUpdateRequestDto(
             String title,
             String content
     ){}
     @Builder
-    public record BoardAddResponseDto(
-            boolean success
-    ){}
-    @Builder
     public record BoardUpdateResponseDto(
             boolean success
     ){}
+    @Builder
+    public record BoardDeleteResponseDto(
+            boolean success
+    ){
+
+    }
 }
