@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
@@ -15,7 +16,7 @@ public class BoardCommandApi {
     //게시글 생성
     @PostMapping()
     public BoardCreateResponseDto create(
-            @RequestBody BoardCreateRequestDto dto, HttpServletRequest request){
+            @RequestBody @Valid BoardCreateRequestDto dto, HttpServletRequest request){
 
         return boardCommandService.create(dto,request);
     }
