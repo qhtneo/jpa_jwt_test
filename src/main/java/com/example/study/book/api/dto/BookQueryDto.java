@@ -17,7 +17,7 @@ public record BookQueryDto() {
 	}
 	
 	@Builder
-	public record GetBooksResponseDto(
+	public record ReadBooksResponseDto(
 			List<BookListProjection> books,
 			Long lastPage
 	){}

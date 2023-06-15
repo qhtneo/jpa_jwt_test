@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum BookQueryErrorCode implements ErrorCode {
 	PAGE_OUT_OF_RANGE("페이지 번호가 유효하지 않음.",HttpStatus.BAD_REQUEST),
+	GENRE_NULL("해당하는 장르가 존재하지 않음.",HttpStatus.BAD_REQUEST),
 	DEFAULT("책 조회 오류", HttpStatus.INTERNAL_SERVER_ERROR);
 	
 	public final String MESSAGE;

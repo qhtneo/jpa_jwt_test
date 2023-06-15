@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 public class BoardCommandApi {
     private final BoardCommandService boardCommandService;
     //게시글 생성
-    @PostMapping("")
+    @PostMapping()
     public BoardCreateResponseDto create(
             @RequestBody BoardCreateRequestDto dto, HttpServletRequest request){
 

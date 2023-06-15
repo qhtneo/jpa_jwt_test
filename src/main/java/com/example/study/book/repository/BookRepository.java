@@ -14,12 +14,13 @@ public interface BookRepository extends JpaRepository<Book, UUID> {
 	Page<BookListProjection> findAllBytitle(Long genreId, Pageable pageable);
 	Page<BookListProjection> findAllByGenreIdAndTitleContainsIgnoreCase(Long genreId, String keyword, Pageable pageable);
 	Page<BookListProjection> findAllByGenreIdAndDescriptionContainsIgnoreCase(Long genreId, String keyword, Pageable pageable);
-	Page<BookListProjection> findAllByGenreIdAndMemberNicknameContainsIgnoreCase(Long genreId, String keyword, Pageable pageable);
+	Page<BookListProjection> findAllByGenreIdAndNicknameContainsIgnoreCase(Long genreId, String keyword, Pageable pageable);
+
+	Page<BookListProjection> findAllByGenreId(Long genreId, Pageable pageable);
 	Long countByGenreId(Long genreId);
 	
 	Optional<BookCoverUrlProjection> findCoverUrlById(UUID id);
 
-	Page<BookListProjection> findAllBy(Pageable pageable);
 
 
 	// 컬럼 이름으로 여러 회원 조회

@@ -46,9 +46,11 @@ public final class DefaultBoardQueryService implements BoardQueryService {
         pageable = pageable.previousOrFirst();
         List<Board> boards = boardSearchResult.toList();
         long lastPageNumber = boardSearchResult.getTotalPages();
+
         if (pageable.getPageNumber() >= lastPageNumber) {
             throw BoardFailureErrorCode.PAGE_OUT_OF_RANGE.defaultException();
         }
+
         return FindBoardListResponseDto.builder()
                 .boardList(boards)
                 .lastPage(lastPageNumber)

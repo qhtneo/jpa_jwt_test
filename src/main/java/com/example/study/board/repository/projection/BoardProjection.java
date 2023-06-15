@@ -7,7 +7,7 @@ public record BoardProjection(
         Long boardNum,
         String title,
         String content,
-        String nickName,
+        String nickname,
         OffsetDateTime createdAt,
         OffsetDateTime updatedAt,
         OffsetDateTime deletedAt

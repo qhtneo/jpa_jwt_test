@@ -48,7 +48,7 @@ public final class DefaultBookCommandService implements BookCommandService {
 		
 		Book book = Book.builder()
 				.memberId(memberId)
-				.memberNickname(nickname)
+				.nickname(nickname)
 				.genreId(dto.genreId())
 				.title(dto.title())
 				.description(dto.description())

@@ -3,18 +3,18 @@
 --작품(BookGenre)장르 테이블
 CREATE TABLE IF NOT EXISTS joara_basic.book_genre (
     id                  BIGINT                                PRIMARY KEY,
-    kor                 VARCHAR(255),
-    eng                 VARCHAR(255),
-
-    CONSTRAINT uq_book_genre_kor UNIQUE(kor),
-    CONSTRAINT uq_book_genre_eng UNIQUE(eng)
+    kor                 VARCHAR(255)                          ,
+    eng                 VARCHAR(255)
+--
+--     CONSTRAINT uq_book_genre_kor UNIQUE(kor),
+--     CONSTRAINT uq_book_genre_eng UNIQUE(eng)
 );
 
 --작품(Book)테이블,  SEQUENCE 추가
 CREATE TABLE IF NOT EXISTS joara_basic.book (
     id                  UUID                                PRIMARY KEY,
     member_id           UUID                                ,
-    member_nickname     VARCHAR(255)                        ,
+    nickname            VARCHAR(255)                        ,
     genre_id            BIGINT                              ,
     isbn                VARCHAR(255)                        ,
     cip                 VARCHAR(255)                        ,

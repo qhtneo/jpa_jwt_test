@@ -17,11 +17,9 @@ import javax.persistence.*;
 		schema = MySchemaConstants.SCHEMA
 //		catalog = MySchemaConstants.SCHEMA
 )
-public class BookGenre {
+public class BookGenre{
 	@Id
-	private Long id;
-	@Column
-	private String kor;
-	@Column
-	private String eng;
+	Long Id;
+	String kor;
+	String eng;
 }
