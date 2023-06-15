@@ -26,7 +26,7 @@ import static com.example.study.support.Constants.DEFAULT_TIMEZONE_ID;
 public class Book extends UuidBaseEntity {
 	@Column private UUID memberId;
 	@Column private String memberNickname;
-	@Column private UUID genreId;
+	@Column private Long genreId;
 	@Column private String title;
 	@Column private String description;
 	@Column private String coverUrl;

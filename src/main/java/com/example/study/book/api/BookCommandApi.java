@@ -17,7 +17,7 @@ public final class BookCommandApi {
 	
 	private final BookCommandService bookCommandService;
 	
-	@PostMapping("/add")
+	@PostMapping("/create")
 	public BookAddResponseDto bookAddResponseDto(
 			@RequestPart(value = "coverImage", required = false) MultipartFile file,
 			@ModelAttribute @Valid BookAddRequestDto body,

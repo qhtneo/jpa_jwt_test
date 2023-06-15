@@ -21,8 +21,8 @@ public class MemberApi {
 
 	@PostMapping("/signup")
 	public MemberSignUpResponseDto signUp(
-			@RequestBody @Valid MemberSignUpRequestDto body,
-			HttpServletRequest request
+			@RequestBody @Valid MemberSignUpRequestDto body
+//			,HttpServletRequest request
 			)
 	{
 //		String ip = request.getHeader("X-Forwarded-For");

@@ -24,7 +24,7 @@ public class DefaultBookQueryService implements BookQueryService{
 	
 	@Override
 	public Page<BookListProjection> searchWithGenreBy(String genreEnglishName, SearchType searchType, String keyword, Pageable pageable) {
-		UUID genreId = bookGenreRepository.findIdByEng(genreEnglishName);
+		Long genreId = bookGenreRepository.findIdByEng(genreEnglishName);
 		log.debug("findAllByGenre genreId: {}", genreId);
 		return switch (searchType) {
 			case TITLE ->
@@ -33,7 +33,7 @@ public class DefaultBookQueryService implements BookQueryService{
 					bookRepository.findAllByGenreIdAndDescriptionContainsIgnoreCase(genreId, keyword, pageable);
 			case MEMBER_NAME ->
 					bookRepository.findAllByGenreIdAndMemberNicknameContainsIgnoreCase(genreId, keyword, pageable);
-			case NONE -> bookRepository.findAllByGenreId(genreId, pageable);
+			case NONE -> bookRepository.findAllBy(pageable);
 		};
 	}
 }
