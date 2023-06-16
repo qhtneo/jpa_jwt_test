@@ -1,15 +1,12 @@
 package com.example.study.book.domain;
 
+import com.example.study.book.domain.type.BookStatus;
+import com.example.study.book.domain.type.FavorOnOffType;
 import com.example.study.support.MySchemaConstants;
-import com.example.study.support.UuidBaseEntity;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.OffsetDateTime;
-import java.util.UUID;
-
 import static com.example.study.support.Constants.DEFAULT_TIMEZONE_ID;
 
 @Entity
@@ -21,22 +18,30 @@ import static com.example.study.support.Constants.DEFAULT_TIMEZONE_ID;
 @Table(
 		name = MySchemaConstants.TB_BOOK,
 		schema = MySchemaConstants.SCHEMA
-		//		catalog = MySchemaConstants.SCHEMA
 )
-public class Book extends UuidBaseEntity {
-	@Column private UUID memberId;
-	@Column private String nickname;
-	@Column private Long genreId;
-	@Column private String title;
-	@Column private String description;
-	@Column private String coverUrl;
-	@Column private String isbn;
-	@Column private String cip;
-	@Column @Builder.Default
-	private Double avgScore = 0.;
-	@Column @Builder.Default
-	private OffsetDateTime createdAt = OffsetDateTime.now(DEFAULT_TIMEZONE_ID);
-	@Column private OffsetDateTime updatedAt;
-	@Column private OffsetDateTime deletedAt;
+public class Book{
+	@Id
+	Long Id;
+	String nickname;
+	Long genreId;
+	String title;
+	String description;
+	String coverUrl;
+	@Builder.Default
+	@Enumerated(EnumType.STRING)
+	BookStatus status = BookStatus.PENDING;
+	@Builder.Default
+	Long totalViewCount = 0L;
+	@Builder.Default
+	Long totalHeartCount = 0L;
+	@Builder.Default
+	Long favorCount = 0L;
+	@Builder.Default
+	@Enumerated(EnumType.STRING)
+	FavorOnOffType favorOnOffType = FavorOnOffType.OFF;
+	@Builder.Default
+	OffsetDateTime createdAt = OffsetDateTime.now(DEFAULT_TIMEZONE_ID);
+	OffsetDateTime updatedAt;
+	OffsetDateTime deletedAt;
 }
 

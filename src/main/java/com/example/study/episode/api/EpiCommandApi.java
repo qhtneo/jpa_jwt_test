@@ -15,11 +15,11 @@ import static com.example.study.episode.api.dto.EpiCommandDto.EpiAddResponsetDto
 @RequiredArgsConstructor
 @RequestMapping("/episode")
 public class EpiCommandApi {
-
-	private final EpiCommandService epiCommandService;
-
-	@PostMapping("/add")
-	public EpiAddResponsetDto add(@Valid EpiAddRequestDto dto, HttpServletRequest request){
-		return epiCommandService.add(dto, request);
-	}
+//
+//	private final EpiCommandService epiCommandService;
+//
+//	@PostMapping("/add")
+//	public EpiAddResponsetDto add(@Valid EpiAddRequestDto dto, HttpServletRequest request){
+//		return epiCommandService.add(dto, request);
+//	}
 }

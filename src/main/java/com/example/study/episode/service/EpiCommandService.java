@@ -7,5 +7,5 @@ import static com.example.study.episode.api.dto.EpiCommandDto.EpiAddResponsetDto
 
 public interface EpiCommandService {
 	
-	EpiAddResponsetDto add(EpiAddRequestDto body,HttpServletRequest request);
+//	EpiAddResponsetDto add(EpiAddRequestDto body,HttpServletRequest request);
 }

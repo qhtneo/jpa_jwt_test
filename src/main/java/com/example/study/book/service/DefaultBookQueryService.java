@@ -22,58 +22,45 @@ import java.util.List;
 @Log4j2
 public class DefaultBookQueryService implements BookQueryService{
 
-	private final BookRepository bookRepository;
-	private final BookGenreRepository bookGenreRepository;
-
-	@Override
-	public ReadBooksResponseDto searchWithGenreBy(
-			String genreEng,
-			SearchType searchType,
-			String keyword,
-			Pageable pageable,
-			String page) {
-
-		Long genreId = bookGenreRepository.findIdByEng(genreEng);
-
-		if(genreId==null){
-			BookQueryErrorCode.GENRE_NULL.defaultException();
-		}
-
-		Page<BookListProjection> bookSearchResult = null;
-		if (page != null && !page.isEmpty()) {
-			pageable = PageRequest.of(Integer.parseInt(page) - 1, pageable.getPageSize(), pageable.getSort());
-		}
-
-		switch (searchType) {
-			case TITLE -> bookSearchResult = bookRepository.findAllByGenreIdAndTitleContainsIgnoreCase(genreId, keyword, pageable);
-			case CONTENT -> bookSearchResult = bookRepository.findAllByGenreIdAndDescriptionContainsIgnoreCase(genreId, keyword, pageable);
-			case MEMBER_NAME -> bookSearchResult = bookRepository.findAllByGenreIdAndNicknameContainsIgnoreCase(genreId, keyword, pageable);
-			case NONE -> bookSearchResult = bookRepository.findAllByGenreId(genreId, pageable);
-		}
-		pageable = pageable.previousOrFirst();
-		List<BookListProjection> books = bookSearchResult.toList();
-		long lastPageNumber = bookSearchResult.getTotalPages();
-		if (pageable.getPageNumber() >= lastPageNumber) {
-			throw BookQueryErrorCode.PAGE_OUT_OF_RANGE.defaultException();
-		}
-		return ReadBooksResponseDto.builder()
-				.books(books)
-				.lastPage(lastPageNumber)
-				.build();
-	}
-
+//	private final BookRepository bookRepository;
+//	private final BookGenreRepository bookGenreRepository;
+//
 //	@Override
-//	public Page<BookListProjection> searchWithGenreBy(String genreEnglishName, SearchType searchType, String keyword, Pageable pageable) {
-//		Long genreId = bookGenreRepository.findIdByEng(genreEnglishName);
-//		log.debug("findAllByGenre genreId: {}", genreId);
-//		return switch (searchType) {
-//			case TITLE ->
-//					bookRepository.findAllByGenreIdAndTitleContainsIgnoreCase(genreId, keyword, pageable);
-//			case CONTENT ->
-//					bookRepository.findAllByGenreIdAndDescriptionContainsIgnoreCase(genreId, keyword, pageable);
-//			case MEMBER_NAME ->
-//					bookRepository.findAllByGenreIdAndnicknameContainsIgnoreCase(genreId, keyword, pageable);
-//			case NONE -> bookRepository.findAllBy(pageable);
-//		};
+//	public ReadBooksResponseDto searchWithGenreBy(
+//			String genreEng,
+//			SearchType searchType,
+//			String keyword,
+//			Pageable pageable,
+//			String page) {
+//
+//		Long genreId = bookGenreRepository.findIdByEng(genreEng);
+//
+//		if(genreId==null){
+//			BookQueryErrorCode.GENRE_NULL.defaultException();
+//		}
+//
+//		Page<BookListProjection> bookSearchResult = null;
+//		if (page != null && !page.isEmpty()) {
+//			pageable = PageRequest.of(Integer.parseInt(page) - 1, pageable.getPageSize(), pageable.getSort());
+//		}
+//
+//		switch (searchType) {
+//			case TITLE -> bookSearchResult = bookRepository.findAllByGenreIdAndTitleContainsIgnoreCase(genreId, keyword, pageable);
+//			case CONTENT -> bookSearchResult = bookRepository.findAllByGenreIdAndDescriptionContainsIgnoreCase(genreId, keyword, pageable);
+//			case MEMBER_NAME -> bookSearchResult = bookRepository.findAllByGenreIdAndNicknameContainsIgnoreCase(genreId, keyword, pageable);
+//			case NONE -> bookSearchResult = bookRepository.findAllByGenreId(genreId, pageable);
+//		}
+//		pageable = pageable.previousOrFirst();
+//		List<BookListProjection> books = bookSearchResult.toList();
+//		long lastPageNumber = bookSearchResult.getTotalPages();
+//		if (pageable.getPageNumber() >= lastPageNumber) {
+//			throw BookQueryErrorCode.PAGE_OUT_OF_RANGE.defaultException();
+//		}
+//		return ReadBooksResponseDto.builder()
+//				.books(books)
+//				.lastPage(lastPageNumber)
+//				.build();
 //	}
+
+
 }

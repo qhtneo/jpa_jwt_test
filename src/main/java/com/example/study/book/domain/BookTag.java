@@ -18,11 +18,8 @@ import java.util.UUID;
 @Table(
 		name = MySchemaConstants.TB_BOOK_TAG,
 		schema = MySchemaConstants.SCHEMA
-		//		catalog = MySchemaConstants.SCHEMA
 )
 public class BookTag extends UuidBaseEntity {
-	@Column
-	private UUID bookId;
-	@Column
-	private UUID bookFreeTagId;
+	Long bookId;
+	String tagName;
 }

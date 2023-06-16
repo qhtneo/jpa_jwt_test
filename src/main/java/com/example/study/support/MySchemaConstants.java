@@ -14,6 +14,9 @@ public final class MySchemaConstants {
 	public static final String TB_EPI_REPLY = "epi_reply";
 	public static final String TB_EPI_SUB_REPLY = "epi_sub_reply";
 	public static final String TB_BOARD = "board";
+	public static final String TB_MEMBER_FAVOR_BOOK = "member_favor_book";
+	public static final String TB_MEMBER_FAVOR_GENRE = "member_favor_genre";
+
 	private MySchemaConstants() {
 	
 	}

@@ -25,49 +25,49 @@ import static com.example.study.episode.api.dto.EpiCommandDto.EpiAddResponsetDto
 @Log4j2
 public class DefaultEpiCommandService implements EpiCommandService{
 	
-	private final JwtPayloadParserBuilder jwtPayloadParserBuilder;
-	private final MemberRepository memberRepository;
-	private final EpisodeRepository episodeRepository;
-	private final BookRepository bookRepository;
-	
-	@Override
-	public EpiAddResponsetDto add(EpiAddRequestDto dto, HttpServletRequest request) {
+//	private final JwtPayloadParserBuilder jwtPayloadParserBuilder;
+//	private final MemberRepository memberRepository;
+//	private final EpisodeRepository episodeRepository;
+//	private final BookRepository bookRepository;
+//
+//	@Override
+//	public EpiAddResponsetDto add(EpiAddRequestDto dto, HttpServletRequest request) {
 		
-		
-		JwtPayloadParser payloadParser = jwtPayloadParserBuilder.buildWith(request);
-		
-		String email = payloadParser.subject();
-		String nickname = payloadParser.claims().get("nickname", String.class);
-		
-		// 유저 아이디
-		UUID memberId = memberRepository.findIdByEmail(email)
-				.orElseThrow(IllegalStateException::new)
-				.id();
-		
-		// 책 커버
-		Optional<BookCoverUrlProjection> optionalCoverUrl = bookRepository.findCoverUrlById(dto.bookId());
-		
-		String coverUrl = optionalCoverUrl.isPresent() ?
-				optionalCoverUrl.get().coverUrl()
-				: "";
-		
-		Episode episode = Episode.builder()
-				.bookId(dto.bookId())
-				.memberId(memberId)
-				.nickname(nickname)
-				.title(dto.title())
-				.content(dto.content())
-				.review(dto.review())
-				.coverUrl(coverUrl)
-				.viewCount(0)
-				.status(EpisodeStatus.UPLOADED)
-				.build();
-		episodeRepository.save(episode);
-		
-		return EpiAddResponsetDto.builder()
-				.success(true)
-				.build();
-	}
+//
+//		JwtPayloadParser payloadParser = jwtPayloadParserBuilder.buildWith(request);
+//
+//		String email = payloadParser.subject();
+//		String nickname = payloadParser.claims().get("nickname", String.class);
+//
+//		// 유저 아이디
+//		UUID memberId = memberRepository.findIdByEmail(email)
+//				.orElseThrow(IllegalStateException::new)
+//				.id();
+//
+//		// 책 커버
+//		Optional<BookCoverUrlProjection> optionalCoverUrl = bookRepository.findCoverUrlById(dto.bookId());
+//
+//		String coverUrl = optionalCoverUrl.isPresent() ?
+//				optionalCoverUrl.get().coverUrl()
+//				: "";
+//
+//		Episode episode = Episode.builder()
+//				.bookId(dto.bookId())
+//				.memberId(memberId)
+//				.nickname(nickname)
+//				.title(dto.title())
+//				.content(dto.content())
+//				.review(dto.review())
+//				.coverUrl(coverUrl)
+//				.viewCount(0)
+//				.status(EpisodeStatus.UPLOADED)
+//				.build();
+//		episodeRepository.save(episode);
+//
+//		return EpiAddResponsetDto.builder()
+//				.success(true)
+//				.build();
+//	}
 	
 
 }

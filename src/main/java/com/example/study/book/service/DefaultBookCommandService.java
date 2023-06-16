@@ -47,14 +47,11 @@ public final class DefaultBookCommandService implements BookCommandService {
 		// if ( ... ) throw MyErrorCodeEnum.NOT_FOUND.defaultException();
 		
 		Book book = Book.builder()
-				.memberId(memberId)
 				.nickname(nickname)
 				.genreId(dto.genreId())
 				.title(dto.title())
 				.description(dto.description())
 				.coverUrl(coverUrl)
-				.isbn(dto.isbn())
-				.cip(dto.cip())
 				.build();
 		bookRepository.save(book);
 		

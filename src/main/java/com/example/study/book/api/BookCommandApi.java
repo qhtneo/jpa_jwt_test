@@ -14,14 +14,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 @RequestMapping("/books")
 public final class BookCommandApi {
-	
-	private final BookCommandService bookCommandService;
-	
-	@PostMapping("/create")
-	public BookAddResponseDto bookAddResponseDto(
-			@RequestPart(value = "coverImage", required = false) MultipartFile file,
-			@ModelAttribute @Valid BookAddRequestDto body,
-			HttpServletRequest request){
-		return new BookAddResponseDto(bookCommandService.add(body, file, request));
-	}
+//
+//	private final BookCommandService bookCommandService;
+//
+//	@PostMapping("/create")
+//	public BookAddResponseDto bookAddResponseDto(
+//			@RequestPart(value = "coverImage", required = false) MultipartFile file,
+//			@ModelAttribute @Valid BookAddRequestDto body,
+//			HttpServletRequest request){
+//		return new BookAddResponseDto(bookCommandService.add(body, file, request));
+//	}
 }

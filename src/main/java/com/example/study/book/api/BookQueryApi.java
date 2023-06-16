@@ -17,44 +17,20 @@ import org.springframework.web.bind.annotation.*;
 public class BookQueryApi {
 	private final BookQueryService bookQueryService;
 	
-	// Restful(over) -> initial CRUD
-	// vs just Rest한 API
+
+//todo
 //	@GetMapping(path = "/genre/{genreEng}")
-//	public GetBooksResponseDto getBooksByGenre(
+//	public ReadBooksResponseDto getBooksByGenre(
 //			@PathVariable String genreEng,
-//			@PageableDefault(size=12, sort="createdAt", direction = Sort.Direction.DESC)
-//			Pageable pageable,
+//			@PageableDefault(size=12, sort="createdAt", direction = Sort.Direction.DESC) Pageable pageable,
 //			@RequestParam(required = false) String keyword,
-//			@RequestParam(required = false, defaultValue = "NONE") SearchType searchType) {
+//			@RequestParam(required = false, defaultValue = "NONE") SearchType searchType,
+//			@RequestParam(required = false) String page) {
 //
-//		pageable = pageable.previousOrFirst();
-//
-//		Page<BookListProjection> bookSearchResult = bookQueryService.searchWithGenreBy(
-//				genreEng, searchType, keyword, pageable);
-//		List<BookListProjection> books = bookSearchResult.toList();
-//		long lastPageNumber = bookSearchResult.getTotalPages();
-//
-//		if (pageable.getPageNumber() >= lastPageNumber) {
-//			throw BookQueryErrorCode.PAGE_OUT_OF_RANGE.defaultException();
-//		}
-//
-//		return GetBooksResponseDto.builder()
-//				.books(books)
-//				.lastPage(lastPageNumber)
-//				.build();
+//		return bookQueryService.searchWithGenreBy(genreEng,searchType,keyword,pageable,page);
 //	}
+//
 
-	@GetMapping(path = "/genre/{genreEng}")
-	public ReadBooksResponseDto getBooksByGenre(
-			@PathVariable String genreEng,
-			@PageableDefault(size=12, sort="createdAt", direction = Sort.Direction.DESC) Pageable pageable,
-			@RequestParam(required = false) String keyword,
-			@RequestParam(required = false, defaultValue = "NONE") SearchType searchType,
-			@RequestParam(required = false) String page) {
-
-		return bookQueryService.searchWithGenreBy(genreEng,searchType,keyword,pageable,page);
-	}
-	
 //	@GetMapping("/{memberId}")
 //	public GetMemberBooksResDto getBooksByMember(
 //			@PathVariable UUID memberId,

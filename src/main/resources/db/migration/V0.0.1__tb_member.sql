@@ -27,24 +27,6 @@ CREATE TABLE IF NOT EXISTS joara_basic.member (
 CREATE UNIQUE INDEX udx_member_email ON joara_basic.member(email);
 
 
---회원선호장르(MemberFavorGenre)테이블
-CREATE TABLE IF NOT EXISTS joara_basic.member_favor_genre (
-    id                  UUID                                PRIMARY KEY,
-    genre_id            BIGINT                              NOT NULL,
-    member_id           UUID                                NOT NULL,
-    favor_genre_name    VARCHAR(255)                        ,
-    created_at          DATE                                NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS joara_basic.member_favor_book (
-    id                  UUID                                PRIMARY KEY,
-    member_id           UUID                                NOT NULL,
-    book_id             UUID                                NOT NULL,
-    favor_book_name     VARCHAR(30)                         NOT NULL,
-    created_at          DATE                                NOT NULL
-);
-
-
 ----유저 디폴트 아이디 생성
 --INSERT INTO joara_basic.member(id,email, password,name, nickname,phone,gender,birth)
 --VALUES ('62e9d74f-9524-4c14-92cb-0d2e47b86c01','email1','password1','name1','nickname1','phone1','M','birth1');
